@@ -47,6 +47,35 @@ export const updateCategoryAPI = async ({ name, type, id }) => {
   //Return a promise
   return response.data;
 };
+//!update transaction
+export const updateTrasactionsAPI = async ({
+  type,
+  name,
+  category,
+  amount,
+  date,
+  description,
+  id,
+}) => {
+  const response = await axios.put(
+    `${BASE_URL}/transactions/update/${id}`,
+    {
+      type,
+      name,
+      category,
+      amount,
+      date,
+      description,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //Return a promise
+  return response.data;
+};
 //! delete
 export const deleteCategoryAPI = async (id) => {
   const response = await axios.delete(`${BASE_URL}/categories/delete/${id}`, {
@@ -57,13 +86,23 @@ export const deleteCategoryAPI = async (id) => {
   //Return a promise
   return response.data;
 };
+//! delete transaction
+export const deleteTransactionAPI = async (id) => {
+  const response = await axios.delete(`${BASE_URL}/transactions/delete/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  //Return a promise
+  return response.data;
+};
 //!list
 export const listTransactionAPI = async ({
-    category,
-    type,
-    startDate,
-    endDate,
-  }) => {
+  category,
+  type,
+  startDate,
+  endDate,
+}) => {
   const response = await axios.get(`${BASE_URL}/transactions/lists`, {
     params: { category, endDate, startDate, type },
     headers: {

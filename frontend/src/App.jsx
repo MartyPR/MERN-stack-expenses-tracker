@@ -16,6 +16,7 @@ import TransactionForm from "./components/Transaction/TransactionForm";
 import Dashboard from "./components/Dashboard";
 import UserProfile from "./components/UserProfile";
 import AuthRoute from "./components/Auth/AuthRoute";
+import UpdateTransaction from "./components/Transaction/UpdateTransaction";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
     <Route path="/categories" element = {<CategoriesList/>} />
     <Route path="/update-category/:id" element = {<UpdateCategory/>} />
     <Route path="/add-transaction" element = {<TransactionForm/>} />
+    <Route path="/update-transaction/:id" element = {<UpdateTransaction/>} />
     <Route path="/dashboard" element = {<Dashboard/>} />
     <Route path="/profile" element = {<AuthRoute> <UserProfile/> </AuthRoute>} /> 
 

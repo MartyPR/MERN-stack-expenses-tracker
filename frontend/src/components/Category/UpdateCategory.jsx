@@ -14,34 +14,36 @@ import { updateCategoryAPI } from "../../services/category/categoryServices";
 import AlertMessage from "../Alert/AlertMessage";
 
 const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Category name is required")
-    .oneOf(["income", "expense"]),
+  name: Yup.string().required("Category name is required"),
+
   type: Yup.string()
     .required("Category type is required")
     .oneOf(["income", "expense"]),
 });
 
 const UpdateCategory = () => {
-    //Params
-    const {id}= useParams()
+  //Params
+  const { id } = useParams();
 
-    const navigate = useNavigate();
-    const {mutateAsync,isPending,isError,error,isSuccess} = useMutation({
-        mutationFn:updateCategoryAPI,
-        mutationKey:['update-category']
-    })
+  const navigate = useNavigate();
+  const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
+    mutationFn: updateCategoryAPI,
+    mutationKey: ["update-category"],
+  });
+
   const formik = useFormik({
     initialValues: {
       type: "",
       name: "",
     },
     onSubmit: (values) => {
-        const data={...values,id}
-        mutateAsync(data).then((data)=>{
-            //redirect
-            navigate('/categories')
-        }).catch(e=>console.log(e))
+      const data = { ...values, id };
+      mutateAsync(data)
+        .then((data) => {
+          //redirect
+          navigate("/categories");
+        })
+        .catch((e) => console.log(e));
     },
   });
 

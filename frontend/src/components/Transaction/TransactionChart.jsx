@@ -36,10 +36,10 @@ const TransactionChart = () => {
   );
   //!data Structurefor the chart
   const data = {
-    labes: ["Income", "Expense"],
+    labels: ["Income", "Expense"],
     datasets: [
       {
-        label: "Transactions",
+        label: ["Transactions"],
         data: [totals?.income, totals?.expense],
         backgroundColor: ["#36A2EB", "#FF6384"],
         borderColor: ["#36A2EB", "#FF6384"],
