@@ -41,11 +41,12 @@ const UpdateTransaction = () => {
     mutationFn: updateTrasactionsAPI,
     mutationKey: ["update-transaction"],
   });
-
+  
   const { data, isError, isLoading, isFetched, error, refetch } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
   });
+  console.log(data);
 
   const formik = useFormik({
     initialValues: {
