@@ -14,6 +14,8 @@ import CategoriesList from "./components/Category/CategoriesList";
 import UpdateCategory from "./components/Category/UpdateCategory";
 import TransactionForm from "./components/Transaction/TransactionForm";
 import Dashboard from "./components/Dashboard";
+import UserProfile from "./components/UserProfile";
+import AuthRoute from "./components/Auth/AuthRoute";
 
 
 function App() {
@@ -31,11 +33,13 @@ function App() {
     <Route path="/"  element={<HomePage/>}/>
     <Route path="/login"  element={<LoginForm/>}/>
     <Route path="/register" element={<RegistrationForm/>}/>
+    
     <Route path="add-category" element={<AddCategory/>} />
     <Route path="/categories" element = {<CategoriesList/>} />
     <Route path="/update-category/:id" element = {<UpdateCategory/>} />
     <Route path="/add-transaction" element = {<TransactionForm/>} />
     <Route path="/dashboard" element = {<Dashboard/>} />
+    <Route path="/profile" element = {<AuthRoute> <UserProfile/> </AuthRoute>} /> 
 
    </Routes>
    </BrowserRouter>
