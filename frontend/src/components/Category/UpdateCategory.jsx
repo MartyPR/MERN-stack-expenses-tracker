@@ -9,43 +9,42 @@ import {
 } from "react-icons/fa";
 import { SiDatabricks } from "react-icons/si";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateCategoryAPI } from "../../services/category/categoryServices";
 import AlertMessage from "../Alert/AlertMessage";
-import { useDispatch } from "react-redux";
-import { addCategoryAPI } from "../../services/category/categoryServices";
 
 const validationSchema = Yup.object({
   name: Yup.string()
-    .required("Category name is required"),
+    .required("Category name is required")
+    .oneOf(["income", "expense"]),
   type: Yup.string()
     .required("Category type is required")
     .oneOf(["income", "expense"]),
 });
 
-const AddCategory = () => {
-  const navigate = useNavigate();
+const UpdateCategory = () => {
+    //Params
+    const {id}= useParams()
 
-
-  // Mutation
-  const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
-    mutationFn: addCategoryAPI,
-    mutationKey: ["login"],
-  });
-
+    const navigate = useNavigate();
+    const {mutateAsync,isPending,isError,error,isSuccess} = useMutation({
+        mutationFn:updateCategoryAPI,
+        mutationKey:['update-category']
+    })
   const formik = useFormik({
     initialValues: {
       type: "",
       name: "",
     },
-    validationSchema,
     onSubmit: (values) => {
-      mutateAsync(values)
-        .then((data) => {
-        //   navigate("/categories");
-        })
-        .catch((e) => console.log(e));
+        const data={...values,id}
+        mutateAsync(data).then((data)=>{
+            //redirect
+            navigate('/categories')
+        }).catch(e=>console.log(e))
     },
   });
+
   return (
     <form
       onSubmit={formik.handleSubmit}
@@ -53,7 +52,7 @@ const AddCategory = () => {
     >
       <div className="text-center">
         <h2 className="text-2xl font-semibold text-gray-800">
-          Add New Category
+          Update Category
         </h2>
         <p className="text-gray-600">Fill in the details below.</p>
       </div>
@@ -70,7 +69,7 @@ const AddCategory = () => {
       {isSuccess && (
         <AlertMessage
           type="success"
-          message="Category added successfully, redirecting..."
+          message="Category updated successfully, redirecting..."
         />
       )}
       {/* Category Type */}
@@ -119,10 +118,10 @@ const AddCategory = () => {
         type="submit"
         className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200 transform"
       >
-        Add Category
+        Update Category
       </button>
     </form>
   );
 };
 
-export default AddCategory;
+export default UpdateCategory;

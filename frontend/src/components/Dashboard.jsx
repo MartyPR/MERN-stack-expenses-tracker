@@ -1,7 +1,8 @@
 import React from "react";
+import TransactionChart from "./Transaction/TransactionChart";
+import TransactionList from "./Transaction/TransactionList";
 
-import TransactionChart from "../Transactions/TransactionChart";
-import TransactionList from "../Transactions/TransactionList";
+
 
 const Dashboard = () => {
   return (
